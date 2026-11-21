@@ -13,6 +13,16 @@ Security research connecting business decisions to inspectable systems, controls
 | Connected research agenda | Research questions and publication criteria | [Agenda](research-agenda.md) |
 | AI action ownership for leadership | Executive decision brief | [Brief](executive-briefs/ai-action-ownership.md) |
 
+## Week-one contributions 002–002
+
+The calendar dates below are scheduled dates. Actual execution timestamps are recorded in the evidence and actual publication times in Git history; contributions are not backdated.
+
+| Day | Scheduled date | Contribution | Stage |
+|---|---|---|---|
+| 002 | 2026-11-19 | [Four synthetic review fixtures](weeks/01-system-and-asset-inventory/annotations.md) | Published research artifact |
+
+[Week-one reader guide](weeks/01-system-and-asset-inventory/README.md). Synthetic local observations are distinguished from missing evidence, intended architecture and deployment claims.
+
 ## Related working artifacts
 
 [AI control plane](https://github.com/cybersmeashish/sovereign-AI) · [Agent security tools](https://github.com/cybersmeashish/cybernonics_tools) · [Application authorization](https://github.com/cybersmeashish/secure-coding-examples) · [Post-quantum inventory](https://github.com/cybersmeashish/crypto-implementations) · [Industry frameworks](https://github.com/cybersmeashish/ashish-vciso-repo)

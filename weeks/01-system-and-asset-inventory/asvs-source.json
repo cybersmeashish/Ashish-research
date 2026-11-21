@@ -1,0 +1,20 @@
+{
+  "repository": "OWASP/ASVS",
+  "tag": "v5.0.0_release",
+  "commit": "5cf9b032440be53ce345ab3c130fda46ba1ce7a2",
+  "release_url": "https://github.com/OWASP/ASVS/releases/tag/v5.0.0_release",
+  "published_at": "2025-05-30T09:35:31Z",
+  "files": [
+    {
+      "path": "5.0/en/0x17-V8-Authorization.md",
+      "sha256": "60c188b1703cab2086841d8f1b4adc0ededf66ed38c676a11bb92347646b5330",
+      "url": "https://github.com/OWASP/ASVS/blob/5cf9b032440be53ce345ab3c130fda46ba1ce7a2/5.0/en/0x17-V8-Authorization.md"
+    },
+    {
+      "path": "5.0/en/0x24-V15-Secure-Coding-and-Architecture.md",
+      "sha256": "4c068e82b157159e9ab7099daecb40af4c2642ad791751f791a26785dead6b22",
+      "url": "https://github.com/OWASP/ASVS/blob/5cf9b032440be53ce345ab3c130fda46ba1ce7a2/5.0/en/0x24-V15-Secure-Coding-and-Architecture.md"
+    }
+  ],
+  "selection_note": "The API latest release is a bleeding-edge build. This work pins a numbered stable release instead."
+}

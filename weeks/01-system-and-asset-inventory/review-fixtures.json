@@ -1,0 +1,622 @@
+{
+  "schema_version": "1.0",
+  "story": "Sentinel Logistics",
+  "scope": "Four local synthetic review examples. No HTTP, network, learned model, real identity provider or deployment.",
+  "relationship_to_day_001": "A01/A02/A04/A05/A06/A10 retain the original proposed asset IDs. A11/A12 are local review gaps, not silently added permissions.",
+  "classifications": [
+    "PUBLIC",
+    "INTERNAL",
+    "CONFIDENTIAL",
+    "RESTRICTED"
+  ],
+  "authoritative_synthetic_orders": [
+    {
+      "order_id": "order-a",
+      "tenant_id": "tenant-alpha",
+      "owner_id": "customer-a",
+      "status": "packed"
+    },
+    {
+      "order_id": "order-a2",
+      "tenant_id": "tenant-alpha",
+      "owner_id": "customer-b",
+      "status": "awaiting-dispatch"
+    },
+    {
+      "order_id": "order-b",
+      "tenant_id": "tenant-beta",
+      "owner_id": "customer-c",
+      "status": "shipped"
+    }
+  ],
+  "fixtures": [
+    {
+      "fixture_id": "P01",
+      "review_label": "problematic",
+      "title": "Client tenant claim plus direct-store bypass",
+      "declared_assets": [
+        {
+          "asset_id": "A01",
+          "name": "Customer portal",
+          "classification": "INTERNAL",
+          "proposed_owner_role": "Application lead",
+          "record_basis": "synthetic design assertion"
+        },
+        {
+          "asset_id": "A02",
+          "name": "Order API",
+          "classification": "CONFIDENTIAL",
+          "proposed_owner_role": "Application lead",
+          "record_basis": "synthetic design assertion"
+        },
+        {
+          "asset_id": "A04",
+          "name": "Mocked agent orchestrator",
+          "classification": "INTERNAL",
+          "proposed_owner_role": "AI platform lead",
+          "record_basis": "synthetic design assertion"
+        },
+        {
+          "asset_id": "A05",
+          "name": "Tool authorization gateway",
+          "classification": "CONFIDENTIAL",
+          "proposed_owner_role": "Application security lead",
+          "record_basis": "synthetic design assertion"
+        },
+        {
+          "asset_id": "A06",
+          "name": "Synthetic order store",
+          "classification": "RESTRICTED",
+          "proposed_owner_role": "Data platform lead",
+          "record_basis": "synthetic design assertion"
+        },
+        {
+          "asset_id": "A10",
+          "name": "In-memory decision event buffer",
+          "classification": "CONFIDENTIAL",
+          "proposed_owner_role": "Security operations lead",
+          "record_basis": "synthetic design assertion"
+        }
+      ],
+      "declared_flows": [
+        {
+          "source": "A01",
+          "destination": "A02",
+          "purpose": "Request order status",
+          "data_fields": [
+            "order_id",
+            "client_claims"
+          ],
+          "data_classification": "CONFIDENTIAL",
+          "proposed_owner_role": "Application lead",
+          "contract_ref": "scope-and-evidence.md#intended-authorized-flows",
+          "record_basis": "intended flow, not a network observation"
+        },
+        {
+          "source": "A02",
+          "destination": "A04",
+          "purpose": "Obtain a synthetic tool proposal",
+          "data_fields": [
+            "order_id",
+            "user_message"
+          ],
+          "data_classification": "CONFIDENTIAL",
+          "proposed_owner_role": "Application lead",
+          "contract_ref": "scope-and-evidence.md#intended-authorized-flows",
+          "record_basis": "intended flow, not a network observation"
+        },
+        {
+          "source": "A04",
+          "destination": "A05",
+          "purpose": "Submit an untrusted read proposal",
+          "data_fields": [
+            "action",
+            "order_id",
+            "agent_claims"
+          ],
+          "data_classification": "CONFIDENTIAL",
+          "proposed_owner_role": "Application lead",
+          "contract_ref": "scope-and-evidence.md#intended-authorized-flows",
+          "record_basis": "intended flow, not a network observation"
+        },
+        {
+          "source": "A05",
+          "destination": "A02",
+          "purpose": "Dispatch independently authorized read",
+          "data_fields": [
+            "action",
+            "order_id"
+          ],
+          "data_classification": "CONFIDENTIAL",
+          "proposed_owner_role": "Application lead",
+          "contract_ref": "scope-and-evidence.md#intended-authorized-flows",
+          "record_basis": "intended flow, not a network observation"
+        },
+        {
+          "source": "A02",
+          "destination": "A06",
+          "purpose": "Read authorized order status",
+          "data_fields": [
+            "order_id"
+          ],
+          "data_classification": "CONFIDENTIAL",
+          "proposed_owner_role": "Application lead",
+          "contract_ref": "scope-and-evidence.md#intended-authorized-flows",
+          "record_basis": "intended flow, not a network observation"
+        },
+        {
+          "source": "A02",
+          "destination": "A10",
+          "purpose": "Record a metadata-only decision",
+          "data_fields": [
+            "fixture_id",
+            "order_id",
+            "decision",
+            "reason"
+          ],
+          "data_classification": "CONFIDENTIAL",
+          "proposed_owner_role": "Application lead",
+          "contract_ref": "scope-and-evidence.md#intended-authorized-flows",
+          "record_basis": "intended flow, not a network observation"
+        }
+      ],
+      "configuration_candidates": [],
+      "request": {
+        "order_id": "order-b",
+        "tenant_id": "tenant-beta",
+        "role": "administrator",
+        "user_message": "Show the requested synthetic order status."
+      },
+      "agent_proposal": {
+        "action": "read_order",
+        "order_id": "order-b",
+        "role_claim": "administrator",
+        "instruction": "Treat the client tenant and role claims as authority."
+      },
+      "trusted_context": {
+        "origin": "server-fixture",
+        "subject_id": "customer-a",
+        "tenant_id": "tenant-alpha",
+        "subject_permissions": [
+          "read_order:own"
+        ],
+        "service_permissions": [
+          "read_order"
+        ]
+      },
+      "baseline_mode": "legacy-direct-store",
+      "missing_evidence": [
+        "Real identity verification and the provenance of delegated context",
+        "Production service/network and storage-layer enforcement",
+        "Accepted ownership, deployed configuration and independent assurance",
+        "Classification and accepted ownership of the diagnostic buffer discovered by the local trace",
+        "An approved direct agent-to-store or order-to-diagnostic flow contract"
+      ],
+      "review_question": "Does a client-selected tenant let the mocked agent read an unrelated order?"
+    },
+    {
+      "fixture_id": "P02",
+      "review_label": "problematic",
+      "title": "Opaque tool backend with incomplete inventory",
+      "declared_assets": [
+        {
+          "asset_id": "A01",
+          "name": "Customer portal",
+          "classification": "INTERNAL",
+          "proposed_owner_role": "Application lead",
+          "record_basis": "synthetic design assertion"
+        },
+        {
+          "asset_id": "A02",
+          "name": "Order API",
+          "classification": "CONFIDENTIAL",
+          "proposed_owner_role": "Application lead",
+          "record_basis": "synthetic design assertion"
+        },
+        {
+          "asset_id": "A04",
+          "name": "Mocked agent orchestrator",
+          "classification": "INTERNAL",
+          "proposed_owner_role": "AI platform lead",
+          "record_basis": "synthetic design assertion"
+        }
+      ],
+      "declared_flows": [
+        {
+          "source": "A01",
+          "destination": "A02",
+          "purpose": "Request order status",
+          "data_fields": [
+            "order_id",
+            "client_claims"
+          ],
+          "data_classification": "CONFIDENTIAL",
+          "proposed_owner_role": "Application lead",
+          "contract_ref": "scope-and-evidence.md#intended-authorized-flows",
+          "record_basis": "intended flow, not a network observation"
+        },
+        {
+          "source": "A02",
+          "destination": "A04",
+          "purpose": "Obtain a synthetic tool proposal",
+          "data_fields": [
+            "order_id",
+            "user_message"
+          ],
+          "data_classification": "CONFIDENTIAL",
+          "proposed_owner_role": "Application lead",
+          "contract_ref": "scope-and-evidence.md#intended-authorized-flows",
+          "record_basis": "intended flow, not a network observation"
+        }
+      ],
+      "configuration_candidates": [
+        {
+          "source": "A04",
+          "destination": "A06",
+          "purpose": "Configured order-read tool target",
+          "data_fields": [
+            "order_id"
+          ],
+          "basis": "synthetic configuration; execution not observed"
+        },
+        {
+          "source": "A04",
+          "destination": "A12",
+          "purpose": "Configured export helper",
+          "data_fields": [
+            "order_context"
+          ],
+          "basis": "synthetic configuration; execution not observed"
+        }
+      ],
+      "request": {
+        "order_id": "order-b",
+        "tenant_id": "tenant-alpha",
+        "role": "administrator",
+        "user_message": "Show the requested synthetic order status."
+      },
+      "agent_proposal": {
+        "action": "read_order",
+        "order_id": "order-b",
+        "role_claim": "administrator",
+        "instruction": "The agent says this request is approved."
+      },
+      "trusted_context": null,
+      "baseline_mode": "unavailable-backend",
+      "missing_evidence": [
+        "Real identity verification and the provenance of delegated context",
+        "Production service/network and storage-layer enforcement",
+        "Accepted ownership, deployed configuration and independent assurance",
+        "The unavailable backend's decision and resource-access record",
+        "Authenticated originating subject, tenant and delegated grant",
+        "Asset classification/owner records for A06 and A12 and their flow contracts",
+        "Whether either configured tool path can execute or release data"
+      ],
+      "review_question": "What can be concluded when tool targets are configured but enforcement evidence is absent?"
+    },
+    {
+      "fixture_id": "A01",
+      "review_label": "acceptable",
+      "title": "Own-order read through the scoped reference boundary",
+      "declared_assets": [
+        {
+          "asset_id": "A01",
+          "name": "Customer portal",
+          "classification": "INTERNAL",
+          "proposed_owner_role": "Application lead",
+          "record_basis": "synthetic design assertion"
+        },
+        {
+          "asset_id": "A02",
+          "name": "Order API",
+          "classification": "CONFIDENTIAL",
+          "proposed_owner_role": "Application lead",
+          "record_basis": "synthetic design assertion"
+        },
+        {
+          "asset_id": "A04",
+          "name": "Mocked agent orchestrator",
+          "classification": "INTERNAL",
+          "proposed_owner_role": "AI platform lead",
+          "record_basis": "synthetic design assertion"
+        },
+        {
+          "asset_id": "A05",
+          "name": "Tool authorization gateway",
+          "classification": "CONFIDENTIAL",
+          "proposed_owner_role": "Application security lead",
+          "record_basis": "synthetic design assertion"
+        },
+        {
+          "asset_id": "A06",
+          "name": "Synthetic order store",
+          "classification": "RESTRICTED",
+          "proposed_owner_role": "Data platform lead",
+          "record_basis": "synthetic design assertion"
+        },
+        {
+          "asset_id": "A10",
+          "name": "In-memory decision event buffer",
+          "classification": "CONFIDENTIAL",
+          "proposed_owner_role": "Security operations lead",
+          "record_basis": "synthetic design assertion"
+        }
+      ],
+      "declared_flows": [
+        {
+          "source": "A01",
+          "destination": "A02",
+          "purpose": "Request order status",
+          "data_fields": [
+            "order_id",
+            "client_claims"
+          ],
+          "data_classification": "CONFIDENTIAL",
+          "proposed_owner_role": "Application lead",
+          "contract_ref": "scope-and-evidence.md#intended-authorized-flows",
+          "record_basis": "intended flow, not a network observation"
+        },
+        {
+          "source": "A02",
+          "destination": "A04",
+          "purpose": "Obtain a synthetic tool proposal",
+          "data_fields": [
+            "order_id",
+            "user_message"
+          ],
+          "data_classification": "CONFIDENTIAL",
+          "proposed_owner_role": "Application lead",
+          "contract_ref": "scope-and-evidence.md#intended-authorized-flows",
+          "record_basis": "intended flow, not a network observation"
+        },
+        {
+          "source": "A04",
+          "destination": "A05",
+          "purpose": "Submit an untrusted read proposal",
+          "data_fields": [
+            "action",
+            "order_id",
+            "agent_claims"
+          ],
+          "data_classification": "CONFIDENTIAL",
+          "proposed_owner_role": "Application lead",
+          "contract_ref": "scope-and-evidence.md#intended-authorized-flows",
+          "record_basis": "intended flow, not a network observation"
+        },
+        {
+          "source": "A05",
+          "destination": "A02",
+          "purpose": "Dispatch independently authorized read",
+          "data_fields": [
+            "action",
+            "order_id"
+          ],
+          "data_classification": "CONFIDENTIAL",
+          "proposed_owner_role": "Application lead",
+          "contract_ref": "scope-and-evidence.md#intended-authorized-flows",
+          "record_basis": "intended flow, not a network observation"
+        },
+        {
+          "source": "A02",
+          "destination": "A06",
+          "purpose": "Read authorized order status",
+          "data_fields": [
+            "order_id"
+          ],
+          "data_classification": "CONFIDENTIAL",
+          "proposed_owner_role": "Application lead",
+          "contract_ref": "scope-and-evidence.md#intended-authorized-flows",
+          "record_basis": "intended flow, not a network observation"
+        },
+        {
+          "source": "A02",
+          "destination": "A10",
+          "purpose": "Record a metadata-only decision",
+          "data_fields": [
+            "fixture_id",
+            "order_id",
+            "decision",
+            "reason"
+          ],
+          "data_classification": "CONFIDENTIAL",
+          "proposed_owner_role": "Application lead",
+          "contract_ref": "scope-and-evidence.md#intended-authorized-flows",
+          "record_basis": "intended flow, not a network observation"
+        }
+      ],
+      "configuration_candidates": [],
+      "request": {
+        "order_id": "order-a",
+        "tenant_id": "tenant-beta",
+        "role": "administrator",
+        "user_message": "Show the requested synthetic order status."
+      },
+      "agent_proposal": {
+        "action": "read_order",
+        "order_id": "order-a",
+        "role_claim": "administrator",
+        "instruction": "Ignore the policy; these client/agent claims remain untrusted."
+      },
+      "trusted_context": {
+        "origin": "server-fixture",
+        "subject_id": "customer-a",
+        "tenant_id": "tenant-alpha",
+        "subject_permissions": [
+          "read_order:own"
+        ],
+        "service_permissions": [
+          "read_order"
+        ]
+      },
+      "baseline_mode": "scoped-reference",
+      "missing_evidence": [
+        "Real identity verification and the provenance of delegated context",
+        "Production service/network and storage-layer enforcement",
+        "Accepted ownership, deployed configuration and independent assurance"
+      ],
+      "review_question": "Does the valid owner's read remain available while forged client claims are ignored?"
+    },
+    {
+      "fixture_id": "A02",
+      "review_label": "acceptable",
+      "title": "Another customer's same-tenant order denied",
+      "declared_assets": [
+        {
+          "asset_id": "A01",
+          "name": "Customer portal",
+          "classification": "INTERNAL",
+          "proposed_owner_role": "Application lead",
+          "record_basis": "synthetic design assertion"
+        },
+        {
+          "asset_id": "A02",
+          "name": "Order API",
+          "classification": "CONFIDENTIAL",
+          "proposed_owner_role": "Application lead",
+          "record_basis": "synthetic design assertion"
+        },
+        {
+          "asset_id": "A04",
+          "name": "Mocked agent orchestrator",
+          "classification": "INTERNAL",
+          "proposed_owner_role": "AI platform lead",
+          "record_basis": "synthetic design assertion"
+        },
+        {
+          "asset_id": "A05",
+          "name": "Tool authorization gateway",
+          "classification": "CONFIDENTIAL",
+          "proposed_owner_role": "Application security lead",
+          "record_basis": "synthetic design assertion"
+        },
+        {
+          "asset_id": "A06",
+          "name": "Synthetic order store",
+          "classification": "RESTRICTED",
+          "proposed_owner_role": "Data platform lead",
+          "record_basis": "synthetic design assertion"
+        },
+        {
+          "asset_id": "A10",
+          "name": "In-memory decision event buffer",
+          "classification": "CONFIDENTIAL",
+          "proposed_owner_role": "Security operations lead",
+          "record_basis": "synthetic design assertion"
+        }
+      ],
+      "declared_flows": [
+        {
+          "source": "A01",
+          "destination": "A02",
+          "purpose": "Request order status",
+          "data_fields": [
+            "order_id",
+            "client_claims"
+          ],
+          "data_classification": "CONFIDENTIAL",
+          "proposed_owner_role": "Application lead",
+          "contract_ref": "scope-and-evidence.md#intended-authorized-flows",
+          "record_basis": "intended flow, not a network observation"
+        },
+        {
+          "source": "A02",
+          "destination": "A04",
+          "purpose": "Obtain a synthetic tool proposal",
+          "data_fields": [
+            "order_id",
+            "user_message"
+          ],
+          "data_classification": "CONFIDENTIAL",
+          "proposed_owner_role": "Application lead",
+          "contract_ref": "scope-and-evidence.md#intended-authorized-flows",
+          "record_basis": "intended flow, not a network observation"
+        },
+        {
+          "source": "A04",
+          "destination": "A05",
+          "purpose": "Submit an untrusted read proposal",
+          "data_fields": [
+            "action",
+            "order_id",
+            "agent_claims"
+          ],
+          "data_classification": "CONFIDENTIAL",
+          "proposed_owner_role": "Application lead",
+          "contract_ref": "scope-and-evidence.md#intended-authorized-flows",
+          "record_basis": "intended flow, not a network observation"
+        },
+        {
+          "source": "A05",
+          "destination": "A02",
+          "purpose": "Dispatch independently authorized read",
+          "data_fields": [
+            "action",
+            "order_id"
+          ],
+          "data_classification": "CONFIDENTIAL",
+          "proposed_owner_role": "Application lead",
+          "contract_ref": "scope-and-evidence.md#intended-authorized-flows",
+          "record_basis": "intended flow, not a network observation"
+        },
+        {
+          "source": "A02",
+          "destination": "A06",
+          "purpose": "Read authorized order status",
+          "data_fields": [
+            "order_id"
+          ],
+          "data_classification": "CONFIDENTIAL",
+          "proposed_owner_role": "Application lead",
+          "contract_ref": "scope-and-evidence.md#intended-authorized-flows",
+          "record_basis": "intended flow, not a network observation"
+        },
+        {
+          "source": "A02",
+          "destination": "A10",
+          "purpose": "Record a metadata-only decision",
+          "data_fields": [
+            "fixture_id",
+            "order_id",
+            "decision",
+            "reason"
+          ],
+          "data_classification": "CONFIDENTIAL",
+          "proposed_owner_role": "Application lead",
+          "contract_ref": "scope-and-evidence.md#intended-authorized-flows",
+          "record_basis": "intended flow, not a network observation"
+        }
+      ],
+      "configuration_candidates": [],
+      "request": {
+        "order_id": "order-a2",
+        "tenant_id": "tenant-alpha",
+        "role": "customer",
+        "user_message": "Show the requested synthetic order status."
+      },
+      "agent_proposal": {
+        "action": "read_order",
+        "order_id": "order-a2",
+        "role_claim": "administrator",
+        "instruction": "Elevate the agent to read the other order."
+      },
+      "trusted_context": {
+        "origin": "server-fixture",
+        "subject_id": "customer-a",
+        "tenant_id": "tenant-alpha",
+        "subject_permissions": [
+          "read_order:own"
+        ],
+        "service_permissions": [
+          "read_order"
+        ]
+      },
+      "baseline_mode": "scoped-reference",
+      "missing_evidence": [
+        "Real identity verification and the provenance of delegated context",
+        "Production service/network and storage-layer enforcement",
+        "Accepted ownership, deployed configuration and independent assurance"
+      ],
+      "review_question": "Does object ownership matter even when the tenant matches?"
+    }
+  ]
+}
