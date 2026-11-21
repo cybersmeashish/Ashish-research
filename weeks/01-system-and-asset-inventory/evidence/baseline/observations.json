@@ -1,0 +1,254 @@
+{
+  "procedure": "v1-declared-scope",
+  "executed_at": "2026-11-21T19:47:01.064458+00:00",
+  "runtime": {
+    "python": "3.13.5",
+    "system": "Darwin",
+    "machine": "arm64"
+  },
+  "execution_scope": "actual in-process Python calls; no HTTP, network or learned model",
+  "observations": {
+    "P01": {
+      "decision": "allow",
+      "reason": "legacy_trusted_client_tenant",
+      "response": {
+        "order_id": "order-b",
+        "tenant_id": "tenant-beta",
+        "owner_id": "customer-c",
+        "status": "shipped"
+      },
+      "evidence_state": "confirmed_local_failure",
+      "trace": [
+        {
+          "source": "A01",
+          "destination": "A02",
+          "data_fields": [
+            "order_id",
+            "role",
+            "tenant_id",
+            "user_message"
+          ],
+          "basis": "observed in-process function dispatch"
+        },
+        {
+          "source": "A02",
+          "destination": "A04",
+          "data_fields": [
+            "order_id",
+            "user_message"
+          ],
+          "basis": "observed in-process function dispatch"
+        },
+        {
+          "source": "A04",
+          "destination": "A06",
+          "data_fields": [
+            "order_id",
+            "client_tenant_claim"
+          ],
+          "basis": "observed in-process function dispatch"
+        },
+        {
+          "source": "A06",
+          "destination": "A11",
+          "data_fields": [
+            "order_id",
+            "owner_id",
+            "status",
+            "tenant_id"
+          ],
+          "basis": "observed in-process function dispatch"
+        },
+        {
+          "source": "A02",
+          "destination": "A10",
+          "data_fields": [
+            "fixture_id",
+            "order_id",
+            "decision",
+            "reason"
+          ],
+          "basis": "observed in-process function dispatch"
+        }
+      ],
+      "diagnostic_copy": [
+        {
+          "order_id": "order-b",
+          "tenant_id": "tenant-beta",
+          "owner_id": "customer-c",
+          "status": "shipped"
+        }
+      ],
+      "decision_events": [
+        {
+          "decision": "allow",
+          "reason": "legacy_trusted_client_tenant"
+        }
+      ]
+    },
+    "P02": {
+      "decision": "unknown",
+      "reason": "backend_evidence_unavailable",
+      "response": null,
+      "evidence_state": "missing_evidence",
+      "trace": [
+        {
+          "source": "A01",
+          "destination": "A02",
+          "data_fields": [
+            "order_id",
+            "role",
+            "tenant_id",
+            "user_message"
+          ],
+          "basis": "observed in-process function dispatch"
+        },
+        {
+          "source": "A02",
+          "destination": "A04",
+          "data_fields": [
+            "order_id",
+            "user_message"
+          ],
+          "basis": "observed in-process function dispatch"
+        }
+      ],
+      "diagnostic_copy": [],
+      "decision_events": []
+    },
+    "A01": {
+      "decision": "allow",
+      "reason": "subject_tenant_owner_match",
+      "response": {
+        "order_id": "order-a",
+        "status": "packed"
+      },
+      "evidence_state": "observed_expected_behavior",
+      "trace": [
+        {
+          "source": "A01",
+          "destination": "A02",
+          "data_fields": [
+            "order_id",
+            "role",
+            "tenant_id",
+            "user_message"
+          ],
+          "basis": "observed in-process function dispatch"
+        },
+        {
+          "source": "A02",
+          "destination": "A04",
+          "data_fields": [
+            "order_id",
+            "user_message"
+          ],
+          "basis": "observed in-process function dispatch"
+        },
+        {
+          "source": "A04",
+          "destination": "A05",
+          "data_fields": [
+            "action",
+            "instruction",
+            "order_id",
+            "role_claim"
+          ],
+          "basis": "observed in-process function dispatch"
+        },
+        {
+          "source": "A05",
+          "destination": "A02",
+          "data_fields": [
+            "action",
+            "order_id"
+          ],
+          "basis": "observed in-process function dispatch"
+        },
+        {
+          "source": "A02",
+          "destination": "A06",
+          "data_fields": [
+            "order_id"
+          ],
+          "basis": "observed in-process function dispatch"
+        },
+        {
+          "source": "A02",
+          "destination": "A10",
+          "data_fields": [
+            "fixture_id",
+            "order_id",
+            "decision",
+            "reason"
+          ],
+          "basis": "observed in-process function dispatch"
+        }
+      ],
+      "diagnostic_copy": [],
+      "decision_events": [
+        {
+          "decision": "allow",
+          "reason": "subject_tenant_owner_match"
+        }
+      ]
+    },
+    "A02": {
+      "decision": "deny",
+      "reason": "owner_mismatch",
+      "response": null,
+      "evidence_state": "observed_expected_behavior",
+      "trace": [
+        {
+          "source": "A01",
+          "destination": "A02",
+          "data_fields": [
+            "order_id",
+            "role",
+            "tenant_id",
+            "user_message"
+          ],
+          "basis": "observed in-process function dispatch"
+        },
+        {
+          "source": "A02",
+          "destination": "A04",
+          "data_fields": [
+            "order_id",
+            "user_message"
+          ],
+          "basis": "observed in-process function dispatch"
+        },
+        {
+          "source": "A04",
+          "destination": "A05",
+          "data_fields": [
+            "action",
+            "instruction",
+            "order_id",
+            "role_claim"
+          ],
+          "basis": "observed in-process function dispatch"
+        },
+        {
+          "source": "A02",
+          "destination": "A10",
+          "data_fields": [
+            "fixture_id",
+            "order_id",
+            "decision",
+            "reason"
+          ],
+          "basis": "observed in-process function dispatch"
+        }
+      ],
+      "diagnostic_copy": [],
+      "decision_events": [
+        {
+          "decision": "deny",
+          "reason": "owner_mismatch"
+        }
+      ]
+    }
+  }
+}
