@@ -9,6 +9,7 @@ Sentinel Logistics is a fictional service. The original [source-led note](eviden
 | 001 | 2026-11-18 | [Evidence note](evidence-note.md) | [Proposed scope](scope-and-evidence.md) |
 | 002 | 2026-11-19 | [Four synthetic review fixtures](annotations.md) | [Four fixtures](review-fixtures.json) · [Pinned ASVS source](asvs-source.json) |
 | 003 | 2026-11-20 | [Review procedure and baseline observations](review-procedure.md) | [Baseline CSV](baseline-observations.csv) · [Raw observations](evidence/baseline/observations.json) |
+| 004 | 2026-11-21 | [Boundary contract and worked example](control-or-playbook.md) | [Worked example](worked-example.md) · [Boundary implementation](../../tools/week01_boundary.py) |
 
 The scheduled dates describe the calendar, not execution or publication dates. See Git commit metadata and raw execution timestamps for actual activity. Source references do not imply submission to, or acceptance by, OWASP.
 

@@ -1,0 +1,24 @@
+{
+  "fixture_id": "P01",
+  "trusted_subject": "customer-a",
+  "trusted_tenant": "tenant-alpha",
+  "client_tenant_claim": "tenant-beta",
+  "requested_order": "order-b",
+  "before": {
+    "decision": "allow",
+    "reason": "legacy_trusted_client_tenant",
+    "response": {
+      "order_id": "order-b",
+      "tenant_id": "tenant-beta",
+      "owner_id": "customer-c",
+      "status": "shipped"
+    },
+    "evidence_state": "confirmed_local_failure"
+  },
+  "proposed_control": {
+    "decision": "deny",
+    "reason": "tenant_mismatch",
+    "response": null
+  },
+  "scope": "same synthetic input; actual local calls; no deployed enforcement claim"
+}
