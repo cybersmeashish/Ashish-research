@@ -1,0 +1,680 @@
+{
+  "procedure": "v2-evidence-union",
+  "executed_at": "2026-11-21T19:47:01.156358+00:00",
+  "runtime": {
+    "python": "3.13.5",
+    "system": "Darwin",
+    "machine": "arm64"
+  },
+  "count_scope": "fixture instances; shared identifiers counted per fixture, not a unique estate",
+  "totals": {
+    "baseline_assets": 21,
+    "identified_assets": 24,
+    "unclassified_assets": 3,
+    "baseline_flows": 20,
+    "identified_flows": 24,
+    "undocumented_flows": 4,
+    "undocumented_observed_local_flows": 2,
+    "undocumented_configuration_only_flows": 2
+  },
+  "observations": {
+    "P01": {
+      "original": {
+        "decision": "allow",
+        "reason": "legacy_trusted_client_tenant",
+        "response": {
+          "order_id": "order-b",
+          "tenant_id": "tenant-beta",
+          "owner_id": "customer-c",
+          "status": "shipped"
+        },
+        "evidence_state": "confirmed_local_failure",
+        "trace": [
+          {
+            "source": "A01",
+            "destination": "A02",
+            "data_fields": [
+              "order_id",
+              "role",
+              "tenant_id",
+              "user_message"
+            ],
+            "basis": "observed in-process function dispatch"
+          },
+          {
+            "source": "A02",
+            "destination": "A04",
+            "data_fields": [
+              "order_id",
+              "user_message"
+            ],
+            "basis": "observed in-process function dispatch"
+          },
+          {
+            "source": "A04",
+            "destination": "A06",
+            "data_fields": [
+              "order_id",
+              "client_tenant_claim"
+            ],
+            "basis": "observed in-process function dispatch"
+          },
+          {
+            "source": "A06",
+            "destination": "A11",
+            "data_fields": [
+              "order_id",
+              "owner_id",
+              "status",
+              "tenant_id"
+            ],
+            "basis": "observed in-process function dispatch"
+          },
+          {
+            "source": "A02",
+            "destination": "A10",
+            "data_fields": [
+              "fixture_id",
+              "order_id",
+              "decision",
+              "reason"
+            ],
+            "basis": "observed in-process function dispatch"
+          }
+        ],
+        "diagnostic_copy": [
+          {
+            "order_id": "order-b",
+            "tenant_id": "tenant-beta",
+            "owner_id": "customer-c",
+            "status": "shipped"
+          }
+        ],
+        "decision_events": [
+          {
+            "decision": "allow",
+            "reason": "legacy_trusted_client_tenant"
+          }
+        ]
+      },
+      "proposed_control": {
+        "decision": "deny",
+        "reason": "tenant_mismatch",
+        "response": null
+      },
+      "expanded_assets": [
+        {
+          "asset_id": "A01",
+          "name": "Customer portal",
+          "classification": "INTERNAL",
+          "proposed_owner_role": "Application lead",
+          "record_basis": "synthetic design assertion"
+        },
+        {
+          "asset_id": "A02",
+          "name": "Order API",
+          "classification": "CONFIDENTIAL",
+          "proposed_owner_role": "Application lead",
+          "record_basis": "synthetic design assertion"
+        },
+        {
+          "asset_id": "A04",
+          "name": "Mocked agent orchestrator",
+          "classification": "INTERNAL",
+          "proposed_owner_role": "AI platform lead",
+          "record_basis": "synthetic design assertion"
+        },
+        {
+          "asset_id": "A05",
+          "name": "Tool authorization gateway",
+          "classification": "CONFIDENTIAL",
+          "proposed_owner_role": "Application security lead",
+          "record_basis": "synthetic design assertion"
+        },
+        {
+          "asset_id": "A06",
+          "name": "Synthetic order store",
+          "classification": "RESTRICTED",
+          "proposed_owner_role": "Data platform lead",
+          "record_basis": "synthetic design assertion"
+        },
+        {
+          "asset_id": "A10",
+          "name": "In-memory decision event buffer",
+          "classification": "CONFIDENTIAL",
+          "proposed_owner_role": "Security operations lead",
+          "record_basis": "synthetic design assertion"
+        },
+        {
+          "asset_id": "A11",
+          "classification": null,
+          "proposed_owner_role": null
+        }
+      ],
+      "expanded_flows": [
+        {
+          "source": "A01",
+          "destination": "A02",
+          "origins": [
+            "declared",
+            "observed_local"
+          ],
+          "documented": true
+        },
+        {
+          "source": "A02",
+          "destination": "A04",
+          "origins": [
+            "declared",
+            "observed_local"
+          ],
+          "documented": true
+        },
+        {
+          "source": "A02",
+          "destination": "A06",
+          "origins": [
+            "declared"
+          ],
+          "documented": true
+        },
+        {
+          "source": "A02",
+          "destination": "A10",
+          "origins": [
+            "declared",
+            "observed_local"
+          ],
+          "documented": true
+        },
+        {
+          "source": "A04",
+          "destination": "A05",
+          "origins": [
+            "declared"
+          ],
+          "documented": true
+        },
+        {
+          "source": "A04",
+          "destination": "A06",
+          "origins": [
+            "observed_local"
+          ],
+          "documented": false
+        },
+        {
+          "source": "A05",
+          "destination": "A02",
+          "origins": [
+            "declared"
+          ],
+          "documented": true
+        },
+        {
+          "source": "A06",
+          "destination": "A11",
+          "origins": [
+            "observed_local"
+          ],
+          "documented": false
+        }
+      ]
+    },
+    "P02": {
+      "original": {
+        "decision": "unknown",
+        "reason": "backend_evidence_unavailable",
+        "response": null,
+        "evidence_state": "missing_evidence",
+        "trace": [
+          {
+            "source": "A01",
+            "destination": "A02",
+            "data_fields": [
+              "order_id",
+              "role",
+              "tenant_id",
+              "user_message"
+            ],
+            "basis": "observed in-process function dispatch"
+          },
+          {
+            "source": "A02",
+            "destination": "A04",
+            "data_fields": [
+              "order_id",
+              "user_message"
+            ],
+            "basis": "observed in-process function dispatch"
+          }
+        ],
+        "diagnostic_copy": [],
+        "decision_events": []
+      },
+      "proposed_control": {
+        "decision": "deny",
+        "reason": "missing_trusted_context",
+        "response": null
+      },
+      "expanded_assets": [
+        {
+          "asset_id": "A01",
+          "name": "Customer portal",
+          "classification": "INTERNAL",
+          "proposed_owner_role": "Application lead",
+          "record_basis": "synthetic design assertion"
+        },
+        {
+          "asset_id": "A02",
+          "name": "Order API",
+          "classification": "CONFIDENTIAL",
+          "proposed_owner_role": "Application lead",
+          "record_basis": "synthetic design assertion"
+        },
+        {
+          "asset_id": "A04",
+          "name": "Mocked agent orchestrator",
+          "classification": "INTERNAL",
+          "proposed_owner_role": "AI platform lead",
+          "record_basis": "synthetic design assertion"
+        },
+        {
+          "asset_id": "A06",
+          "classification": null,
+          "proposed_owner_role": null
+        },
+        {
+          "asset_id": "A12",
+          "classification": null,
+          "proposed_owner_role": null
+        }
+      ],
+      "expanded_flows": [
+        {
+          "source": "A01",
+          "destination": "A02",
+          "origins": [
+            "declared",
+            "observed_local"
+          ],
+          "documented": true
+        },
+        {
+          "source": "A02",
+          "destination": "A04",
+          "origins": [
+            "declared",
+            "observed_local"
+          ],
+          "documented": true
+        },
+        {
+          "source": "A04",
+          "destination": "A06",
+          "origins": [
+            "configuration_only"
+          ],
+          "documented": false
+        },
+        {
+          "source": "A04",
+          "destination": "A12",
+          "origins": [
+            "configuration_only"
+          ],
+          "documented": false
+        }
+      ]
+    },
+    "A01": {
+      "original": {
+        "decision": "allow",
+        "reason": "subject_tenant_owner_match",
+        "response": {
+          "order_id": "order-a",
+          "status": "packed"
+        },
+        "evidence_state": "observed_expected_behavior",
+        "trace": [
+          {
+            "source": "A01",
+            "destination": "A02",
+            "data_fields": [
+              "order_id",
+              "role",
+              "tenant_id",
+              "user_message"
+            ],
+            "basis": "observed in-process function dispatch"
+          },
+          {
+            "source": "A02",
+            "destination": "A04",
+            "data_fields": [
+              "order_id",
+              "user_message"
+            ],
+            "basis": "observed in-process function dispatch"
+          },
+          {
+            "source": "A04",
+            "destination": "A05",
+            "data_fields": [
+              "action",
+              "instruction",
+              "order_id",
+              "role_claim"
+            ],
+            "basis": "observed in-process function dispatch"
+          },
+          {
+            "source": "A05",
+            "destination": "A02",
+            "data_fields": [
+              "action",
+              "order_id"
+            ],
+            "basis": "observed in-process function dispatch"
+          },
+          {
+            "source": "A02",
+            "destination": "A06",
+            "data_fields": [
+              "order_id"
+            ],
+            "basis": "observed in-process function dispatch"
+          },
+          {
+            "source": "A02",
+            "destination": "A10",
+            "data_fields": [
+              "fixture_id",
+              "order_id",
+              "decision",
+              "reason"
+            ],
+            "basis": "observed in-process function dispatch"
+          }
+        ],
+        "diagnostic_copy": [],
+        "decision_events": [
+          {
+            "decision": "allow",
+            "reason": "subject_tenant_owner_match"
+          }
+        ]
+      },
+      "proposed_control": {
+        "decision": "allow",
+        "reason": "subject_tenant_owner_match",
+        "response": {
+          "order_id": "order-a",
+          "status": "packed"
+        }
+      },
+      "expanded_assets": [
+        {
+          "asset_id": "A01",
+          "name": "Customer portal",
+          "classification": "INTERNAL",
+          "proposed_owner_role": "Application lead",
+          "record_basis": "synthetic design assertion"
+        },
+        {
+          "asset_id": "A02",
+          "name": "Order API",
+          "classification": "CONFIDENTIAL",
+          "proposed_owner_role": "Application lead",
+          "record_basis": "synthetic design assertion"
+        },
+        {
+          "asset_id": "A04",
+          "name": "Mocked agent orchestrator",
+          "classification": "INTERNAL",
+          "proposed_owner_role": "AI platform lead",
+          "record_basis": "synthetic design assertion"
+        },
+        {
+          "asset_id": "A05",
+          "name": "Tool authorization gateway",
+          "classification": "CONFIDENTIAL",
+          "proposed_owner_role": "Application security lead",
+          "record_basis": "synthetic design assertion"
+        },
+        {
+          "asset_id": "A06",
+          "name": "Synthetic order store",
+          "classification": "RESTRICTED",
+          "proposed_owner_role": "Data platform lead",
+          "record_basis": "synthetic design assertion"
+        },
+        {
+          "asset_id": "A10",
+          "name": "In-memory decision event buffer",
+          "classification": "CONFIDENTIAL",
+          "proposed_owner_role": "Security operations lead",
+          "record_basis": "synthetic design assertion"
+        }
+      ],
+      "expanded_flows": [
+        {
+          "source": "A01",
+          "destination": "A02",
+          "origins": [
+            "declared",
+            "observed_local"
+          ],
+          "documented": true
+        },
+        {
+          "source": "A02",
+          "destination": "A04",
+          "origins": [
+            "declared",
+            "observed_local"
+          ],
+          "documented": true
+        },
+        {
+          "source": "A02",
+          "destination": "A06",
+          "origins": [
+            "declared",
+            "observed_local"
+          ],
+          "documented": true
+        },
+        {
+          "source": "A02",
+          "destination": "A10",
+          "origins": [
+            "declared",
+            "observed_local"
+          ],
+          "documented": true
+        },
+        {
+          "source": "A04",
+          "destination": "A05",
+          "origins": [
+            "declared",
+            "observed_local"
+          ],
+          "documented": true
+        },
+        {
+          "source": "A05",
+          "destination": "A02",
+          "origins": [
+            "declared",
+            "observed_local"
+          ],
+          "documented": true
+        }
+      ]
+    },
+    "A02": {
+      "original": {
+        "decision": "deny",
+        "reason": "owner_mismatch",
+        "response": null,
+        "evidence_state": "observed_expected_behavior",
+        "trace": [
+          {
+            "source": "A01",
+            "destination": "A02",
+            "data_fields": [
+              "order_id",
+              "role",
+              "tenant_id",
+              "user_message"
+            ],
+            "basis": "observed in-process function dispatch"
+          },
+          {
+            "source": "A02",
+            "destination": "A04",
+            "data_fields": [
+              "order_id",
+              "user_message"
+            ],
+            "basis": "observed in-process function dispatch"
+          },
+          {
+            "source": "A04",
+            "destination": "A05",
+            "data_fields": [
+              "action",
+              "instruction",
+              "order_id",
+              "role_claim"
+            ],
+            "basis": "observed in-process function dispatch"
+          },
+          {
+            "source": "A02",
+            "destination": "A10",
+            "data_fields": [
+              "fixture_id",
+              "order_id",
+              "decision",
+              "reason"
+            ],
+            "basis": "observed in-process function dispatch"
+          }
+        ],
+        "diagnostic_copy": [],
+        "decision_events": [
+          {
+            "decision": "deny",
+            "reason": "owner_mismatch"
+          }
+        ]
+      },
+      "proposed_control": {
+        "decision": "deny",
+        "reason": "owner_mismatch",
+        "response": null
+      },
+      "expanded_assets": [
+        {
+          "asset_id": "A01",
+          "name": "Customer portal",
+          "classification": "INTERNAL",
+          "proposed_owner_role": "Application lead",
+          "record_basis": "synthetic design assertion"
+        },
+        {
+          "asset_id": "A02",
+          "name": "Order API",
+          "classification": "CONFIDENTIAL",
+          "proposed_owner_role": "Application lead",
+          "record_basis": "synthetic design assertion"
+        },
+        {
+          "asset_id": "A04",
+          "name": "Mocked agent orchestrator",
+          "classification": "INTERNAL",
+          "proposed_owner_role": "AI platform lead",
+          "record_basis": "synthetic design assertion"
+        },
+        {
+          "asset_id": "A05",
+          "name": "Tool authorization gateway",
+          "classification": "CONFIDENTIAL",
+          "proposed_owner_role": "Application security lead",
+          "record_basis": "synthetic design assertion"
+        },
+        {
+          "asset_id": "A06",
+          "name": "Synthetic order store",
+          "classification": "RESTRICTED",
+          "proposed_owner_role": "Data platform lead",
+          "record_basis": "synthetic design assertion"
+        },
+        {
+          "asset_id": "A10",
+          "name": "In-memory decision event buffer",
+          "classification": "CONFIDENTIAL",
+          "proposed_owner_role": "Security operations lead",
+          "record_basis": "synthetic design assertion"
+        }
+      ],
+      "expanded_flows": [
+        {
+          "source": "A01",
+          "destination": "A02",
+          "origins": [
+            "declared",
+            "observed_local"
+          ],
+          "documented": true
+        },
+        {
+          "source": "A02",
+          "destination": "A04",
+          "origins": [
+            "declared",
+            "observed_local"
+          ],
+          "documented": true
+        },
+        {
+          "source": "A02",
+          "destination": "A06",
+          "origins": [
+            "declared"
+          ],
+          "documented": true
+        },
+        {
+          "source": "A02",
+          "destination": "A10",
+          "origins": [
+            "declared",
+            "observed_local"
+          ],
+          "documented": true
+        },
+        {
+          "source": "A04",
+          "destination": "A05",
+          "origins": [
+            "declared",
+            "observed_local"
+          ],
+          "documented": true
+        },
+        {
+          "source": "A05",
+          "destination": "A02",
+          "origins": [
+            "declared"
+          ],
+          "documented": true
+        }
+      ]
+    }
+  }
+}

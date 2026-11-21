@@ -1,0 +1,5 @@
+day,scheduled_date,contribution,artifact_stage,public_artifact_url,upstream_submission,actual_publication_record
+2,2026-11-19,Four synthetic review fixtures,Complete,https://github.com/cybersmeashish/Ashish-research/blob/main/weeks/01-system-and-asset-inventory/annotations.md,Not submitted,GitHub commit metadata; no backdating
+3,2026-11-20,Review procedure and baseline observations,Complete,https://github.com/cybersmeashish/Ashish-research/blob/main/weeks/01-system-and-asset-inventory/review-procedure.md,Not submitted,GitHub commit metadata; no backdating
+4,2026-11-21,Boundary contract and worked example,Complete,https://github.com/cybersmeashish/Ashish-research/blob/main/weeks/01-system-and-asset-inventory/control-or-playbook.md,Not submitted,GitHub commit metadata; no backdating
+5,2026-11-22,Evidence evaluation and limitations,Complete,https://github.com/cybersmeashish/Ashish-research/blob/main/weeks/01-system-and-asset-inventory/evaluation-summary.md,Not submitted,GitHub commit metadata; no backdating

@@ -1,0 +1,6 @@
+{
+  "weeks/01-system-and-asset-inventory/review-fixtures.json": "81f62b5ac005470d4ad78be42d16b8b2d6341a09030ec9d0fc1c7226ca09c7cb",
+  "tools/week01_review.py": "dcce514c96d1e17b278bcec239b08e474151fe38015b7e8db3fcaeff1194f761",
+  "tools/week01_boundary.py": "5df400433c9c334f105cd907a98d33296985abbc041778851fa42bbed927aac5",
+  "tools/week01_evaluate.py": "2b4f659e9da371f531bb9ea956a5098b6c34ba2f6e838e9ae74132b7f5732d0e"
+}

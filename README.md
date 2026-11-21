@@ -13,7 +13,7 @@ Security research connecting business decisions to inspectable systems, controls
 | Connected research agenda | Research questions and publication criteria | [Agenda](research-agenda.md) |
 | AI action ownership for leadership | Executive decision brief | [Brief](executive-briefs/ai-action-ownership.md) |
 
-## Week-one contributions 002–004
+## Week-one contributions 002–005
 
 The calendar dates below are scheduled dates. Actual execution timestamps are recorded in the evidence and actual publication times in Git history; contributions are not backdated.
 
@@ -22,6 +22,7 @@ The calendar dates below are scheduled dates. Actual execution timestamps are re
 | 002 | 2026-11-19 | [Four synthetic review fixtures](weeks/01-system-and-asset-inventory/annotations.md) | Published research artifact |
 | 003 | 2026-11-20 | [Review procedure and baseline observations](weeks/01-system-and-asset-inventory/review-procedure.md) | Published research artifact |
 | 004 | 2026-11-21 | [Boundary contract and worked example](weeks/01-system-and-asset-inventory/control-or-playbook.md) | Published research artifact |
+| 005 | 2026-11-22 | [Evidence evaluation and limitations](weeks/01-system-and-asset-inventory/evaluation-summary.md) | Published research artifact |
 
 [Week-one reader guide](weeks/01-system-and-asset-inventory/README.md). Synthetic local observations are distinguished from missing evidence, intended architecture and deployment claims.
 
